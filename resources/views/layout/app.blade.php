@@ -23,7 +23,7 @@
     </div>
 
     <footer>
-        <p> </p>
+        <p>&nbsp; </p>
     </footer>
 </body>
 

@@ -1,10 +1,7 @@
 @extends('layout.app')
 @section('title', 'Katalog Sapi - Istana Qurban')
-@section('content')
-<head>
-
+@section('css')
     <style>
-
         /* --- LAYOUT --- */
 
         .grid {
@@ -19,6 +16,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            border-radius: 10px;
         }
 
         .card-image {
@@ -60,9 +58,17 @@
             text-transform: uppercase;
         }
 
-        .status-available { background-color: #38b2ac; }
-        .status-booking { background-color: #f6ad55; }
-        .status-sold { background-color: #e53e3e; }
+        .status-available {
+            background-color: #38b2ac;
+        }
+
+        .status-booking {
+            background-color: #f6ad55;
+        }
+
+        .status-sold {
+            background-color: #e53e3e;
+        }
 
         .card-description {
             font-size: 16px;
@@ -82,7 +88,7 @@
         .actions {
             display: flex;
             gap: 5px;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
         }
 
         .btn-minimal {
@@ -96,7 +102,7 @@
             text-transform: uppercase;
             cursor: pointer;
             text-align: center;
-            min-width: 60px; 
+            min-width: 60px;
         }
 
         .btn-minimal:hover {
@@ -107,90 +113,75 @@
             display: inline;
         }
     </style>
-</head>
-<body>
-{{-- @include("layout.navbar") --}}
-{{-- <nav class="navbar">
-    <div class="navbar-brand">
-        <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban"> 
-        <span>Istana Qurban</span>
-    </div>
-    <div class="nav-links">
-        <a href="{{ route('dashboard') }}">Dashboard</a>
-        <a href="#" class="active">Katalog Sapi</a>
-        <a href="#">Registrasi & Booking</a>
-        <a href="#">Transaksi</a>
-        <a href="#">Laporan</a>
-    </div>
-    <div class="user-profile">👤</div>
-</nav> --}}
+@endsection
+@section('content')
+    <div class="container">
 
-<div class="container">
+        <h1>Katalog Sapi</h1>
 
-    <h1>Katalog Sapi</h1>
+        <div class="top-bar">
+            <a href="{{ route('sapi.create') }}" class="btn-add">+ TAMBAH SAPI</a>
+        </div>
 
-    <div class="top-bar">
-        <a href="{{ route('sapi.create') }}" class="btn-add">+ TAMBAH SAPI</a>
-    </div>
-
-    <div class="grid">
-        @foreach($sapis as $sapi)
-            <div class="card">
-                <div class="card-image">
-                    @if($sapi->foto_path)
-                        <img src="{{ asset('storage/' . $sapi->foto_path) }}" alt="Foto Sapi">
-                    @else
-                        <div style="height:100%; display:flex; align-items:center; justify-content:center; color:#999; font-size: 12px;">No Image</div>
-                    @endif
-                </div>
-
-                <div class="card-body">
-                    <div class="card-header-row">
-                        <div class="id-text">#{{ $sapi->kode_sapi }}</div>
-                        <span class="status-badge 
-                            @if($sapi->status == 'Tersedia') status-available 
-                            @elseif($sapi->status == 'Booking') status-booking 
-                            @else status-sold 
-                            @endif">
-                            @if($sapi->status == 'Tersedia') AVAILABLE
-                            @elseif($sapi->status == 'Terjual') SOLD
-                            @else {{ strtoupper($sapi->status) }}
-                            @endif
-                        </span>
-                    </div>
-
-                    <div class="card-description">
-                        {{ $sapi->jenis_sapi }} • {{ $sapi->bobot }} kg
-                    </div>
-
-                    <div class="price-text">
-                        RP{{ number_format($sapi->harga_jual, 0, ',', '.') }}
-                    </div>
-
-                    <div class="actions">
-                        <a href="{{ route('sapi.edit', $sapi->id) }}" class="btn-minimal">EDIT</a>
-                        
-                         @if($sapi->status == 'Tersedia')
-                        <a href="{{ route('pesanan.create', $sapi->id) }}" class="btn-minimal">PESAN</a>
+        <div class="grid">
+            @foreach ($sapis as $sapi)
+                <div class="card">
+                    <div class="card-image">
+                        @if ($sapi->foto_path)
+                            <img src="{{ asset('storage/' . $sapi->foto_path) }}" alt="Foto Sapi">
+                        @else
+                            <div
+                                style="height:100%; display:flex; align-items:center; justify-content:center; color:#999; font-size: 12px;">
+                                No Image</div>
                         @endif
-                        <form method="POST" action="{{ route('sapi.destroy', $sapi->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-minimal" onclick="return confirm('Hapus data?')">
-                                HAPUS
-                            </button>
-                        </form>
-                        
-                    
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-header-row">
+                            <div class="id-text">#{{ $sapi->kode_sapi }}</div>
+                            <span
+                                class="status-badge 
+                            @if ($sapi->status == 'Tersedia') status-available 
+                            @elseif($sapi->status == 'Booking') status-booking 
+                            @else status-sold @endif">
+                                @if ($sapi->status == 'Tersedia')
+                                    AVAILABLE
+                                @elseif($sapi->status == 'Terjual')
+                                    SOLD
+                                @else
+                                    {{ strtoupper($sapi->status) }}
+                                @endif
+                            </span>
+                        </div>
+
+                        <div class="card-description">
+                            {{ $sapi->jenis_sapi }} • {{ $sapi->bobot }} kg
+                        </div>
+
+                        <div class="price-text">
+                            RP{{ number_format($sapi->harga_jual, 0, ',', '.') }}
+                        </div>
+
+                        <div class="actions">
+                            <a href="{{ route('sapi.edit', $sapi->id) }}" class="btn-minimal">EDIT</a>
+
+                            @if ($sapi->status == 'Tersedia')
+                                <a href="{{ route('pesanan.create', $sapi->id) }}" class="btn-minimal">PESAN</a>
+                            @endif
+                            <form method="POST" action="{{ route('sapi.destroy', $sapi->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-minimal" onclick="return confirm('Hapus data?')">
+                                    HAPUS
+                                </button>
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 
-
-</div>
-
-</body>
-</html>
 @endsection
