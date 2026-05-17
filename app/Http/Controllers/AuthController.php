@@ -42,7 +42,7 @@ class AuthController extends Controller
             ])->onlyInput('email');
         }
 
-         return view('pages.auth.login');
+        return view('pages.auth.login');
     }
 
     public function logout(Request $request)

@@ -1,230 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-        background: #f5f6fa;
-        color: #222;
-    }
-    /* --- NAVBAR --- */
-    .navbar {
-        background-color: #d1e7dd; 
-        padding: 12px 4%;
+body {
+    background: #f5f6fa;
+    color: #222;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: #d1e7dd;
+    padding: 12px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+} */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 1000;
+    color: #1e4d2b;
+    text-transform: uppercase;
+    font-size: 18px;
+    z-index: 1001;
+    /* Supaya tetap di atas saat menu mobile buka */
+}
+
+.navbar-brand img {
+    height: 45px;
+    width: auto;
+}
+
+/* --- NAV LINKS (DESKTOP) --- */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 800;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.nav-links a.active {
+    color: #1e4d2b;
+    border-bottom: 2px solid #1e4d2b;
+    padding-bottom: 5px;
+}
+
+/* --- USER SECTION --- */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1001;
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e4d2b;
+}
+
+.user-profile-container {
+    position: relative;
+}
+
+.user-profile {
+    cursor: pointer;
+    font-size: 14px;
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1.5px solid #1e4d2b;
+}
+
+.dropdown-logout {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 130%;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 140px;
+    z-index: 1000;
+    border: 1px solid #ddd;
+}
+
+.dropdown-logout button {
+
+    width: 100%;
+    background: transparent;
+    color: #c53030;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.dropdown-logout button:hover {
+    background: #fff5f5;
+}
+
+.dropdown-logout.show {
+    display: block;
+}
+
+/* Hamburger Menu Icon (Hidden on Desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #1e4d2b;
+    border-radius: 2px;
+}
+
+/* Sembunyikan tombol hamburger di layar laptop/desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+/* --- RESPONSIVE MODE (MOBILE) --- */
+@media (max-width: 768px) {
+    .menu-toggle {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-        position: relative;
+        /* Munculkan hamburger di HP */
+        order: 1;
     }
+
+    .nav-toggle {
+        display: flex; /* Memunculkan tombol hamburger di HP */
+    }
+
 
     .navbar-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 1000;
-        color: #1e4d2b;
-        text-transform: uppercase;
-        font-size: 18px;
-        z-index: 1001; /* Supaya tetap di atas saat menu mobile buka */
+        order: 2;
+        font-size: 14px;
+        /* Kecilin dikit tulisan brand di HP */
     }
 
     .navbar-brand img {
-        height: 45px;
-        width: auto;
+        height: 35px;
     }
 
-    /* --- NAV LINKS (DESKTOP) --- */
-    .nav-links {
-        display: flex;
-        gap: 20px;
-    }
-
-    .nav-links a {
-        text-decoration: none;
-        color: #444;
-        font-weight: 800;
-        font-size: 14px;
-        transition: color 0.2s;
-    }
-
-    .nav-links a.active {
-        color: #1e4d2b;
-        border-bottom: 2px solid #1e4d2b;
-        padding-bottom: 5px;
-    }
-
-    /* --- USER SECTION --- */
     .user-section {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        z-index: 1001;
+        order: 3;
     }
 
     .user-name {
-        font-size: 13px;
-        font-weight: 700;
-        color: #1e4d2b;
-    }
-
-    .user-profile-container {
-        position: relative;
-    }
-
-    .user-profile {
-        cursor: pointer;
-        font-size: 14px;
-        background: #fff;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 1.5px solid #1e4d2b;
-    }
-
-    .dropdown-logout {
         display: none;
+        /* Sembunyikan nama di HP biar gak sempit, cukup ikon */
+    }
+
+    .nav-links {
+        display: none;
+        /* Sembunyikan menu asli */
         position: absolute;
-        right: 0;
-        top: 130%;
-        background: white;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        padding: 8px;
-        min-width: 140px;
-        z-index: 1000;
-        border: 1px solid #ddd;
-    }
-
-    .dropdown-logout button {
-
+        top: 100%;
+        left: 0;
         width: 100%;
-        background: transparent;
-        color: #c53030;
-        border: none;
-        padding: 8px;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 12px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-align: left;
-    }
-
-    .dropdown-logout button:hover {
-        background: #fff5f5;
-    }
-
-    .dropdown-logout.show {
-        display: block;
-    }
-
-    /* Hamburger Menu Icon (Hidden on Desktop) */
-    .menu-toggle {
-        display: none;
+        background-color: #d1e7dd;
         flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
-        z-index: 1001;
+        padding: 20px;
+        gap: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
 
-    .menu-toggle span {
-        width: 25px;
-        height: 3px;
-        background-color: #1e4d2b;
-        border-radius: 2px;
+      .nav-links {
+        display: flex; /* Mengubah susunan menjadi flexbox */
+        flex-direction: column; /* Menyusun menu ke bawah (vertikal) */
+        position: absolute;
+        top: 60px; /* Sesuaikan dengan tinggi navbar Anda */
+        left: -100%; /* Melempar menu ke luar layar kiri agar tidak terlihat */
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        transition: 0.3s ease;
+        z-index: 999;
     }
 
-    /* --- RESPONSIVE MODE (MOBILE) --- */
-    @media (max-width: 768px) {
-        .menu-toggle {
-            display: flex; /* Munculkan hamburger di HP */
-            order: 1;
-        }
-
-        .navbar-brand {
-            order: 2;
-            font-size: 14px; /* Kecilin dikit tulisan brand di HP */
-        }
-
-        .navbar-brand img {
-            height: 35px;
-        }
-
-        .user-section {
-            order: 3;
-        }
-
-        .user-name {
-            display: none; /* Sembunyikan nama di HP biar gak sempit, cukup ikon */
-        }
-
-        .nav-links {
-            display: none; /* Sembunyikan menu asli */
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #d1e7dd;
-            flex-direction: column;
-            padding: 20px;
-            gap: 15px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .nav-links.active {
-            display: flex; /* Munculkan saat hamburger di-klik */
-        }
-
-        .nav-links a {
-            font-size: 16px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
+    .nav-links.active {
+        display: flex;
+        /* Munculkan saat hamburger di-klik */
     }
 
-    .container {
-            width: 95%;
-            margin: 20px auto;
-        }
+    .nav-links a {
+        font-size: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+}
 
-        h1 {
-            margin-bottom: 15px;
-            font-size: 28px;
-            font-weight: 800;    
-            color: #1e4d2b;      
-        }
+.container {
+    width: 95%;
+    margin: 20px auto;
+}
 
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-        }
+h1 {
+    margin-bottom: 15px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e4d2b;
+}
 
-        .btn-add {
-            text-decoration: none;
-            background: #4c9b77;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-        }
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(to bottom, #eef4f1, #f7faf9);
-            color: var(--text);
-            padding: 0px 0px;
-        }
+.btn-add {
+    text-decoration: none;
+    background: #4c9b77;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
 
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom, #eef4f1, #f7faf9);
+    color: var(--text);
+    padding: 0px 0px;
+}

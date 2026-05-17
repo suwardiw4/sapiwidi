@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: screen; /* Fallback */
+            min-height: screen;
+            /* Fallback */
             min-height: 100vh;
             padding: 20px;
         }
@@ -29,8 +31,9 @@
             max-width: 400px;
             padding: 40px 30px;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-top: 8px solid #1e4d2b; /* Hijau gelap khas dashboard */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #1e4d2b;
+            /* Hijau gelap khas dashboard */
             text-align: center;
         }
 
@@ -140,55 +143,47 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-card">
-    <h1>Istana Qurban</h1>
-    <p class="subtitle">Silakan masuk ke akun Anda</p>
+    <div class="login-card">
+        <h1>Istana Qurban</h1>
+        <p class="subtitle">Silakan masuk ke akun Anda</p>
 
-    {{-- Alert Error --}}
-    @if(session('error'))
-        <div class="alert-error">
-            {{ session('error') }}
-        </div>
-    @endif
+        {{-- Alert Error --}}
+        @if (session('error'))
+            <div class="alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
 
-    <form action="{{ route('login') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input 
-                type="email" 
-                name="email" 
-                id="inputEmail" 
-                placeholder="nama@gmail.com" 
-                value="{{ old('email') }}" 
-                required>
-            @error('email')
-                <p class="error-text">{{ $message }}</p>
-            @enderror
-        </div>
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" name="email" id="inputEmail" placeholder="nama@gmail.com"
+                    value="{{ old('email') }}" required>
+                @error('email')
+                    <p class="error-text">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input 
-                type="password" 
-                name="password" 
-                id="inputPassword" 
-                placeholder="Masukkan password" 
-                required>
-            @error('password')
-                <p class="error-text">{{ $message }}</p>
-            @enderror
-        </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" placeholder="Masukkan password" required>
+                @error('password')
+                    <p class="error-text">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <button type="submit" class="btn-login">Login</button>
-    </form>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
 
-    {{-- <div class="login-footer">
+        {{-- <div class="login-footer">
         Belum punya akun? <a href="/register">Daftar di sini</a>
     </div> --}}
-</div>
+    </div>
 
 </body>
+
 </html>

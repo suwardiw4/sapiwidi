@@ -1,13 +1,15 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban"> 
+        <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban">
         <span>Istana Qurban</span>
     </div>
 
     <div class="nav-links">
         <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ route('sapi.index') }}" class="{{ request()->routeIs('sapi.*') ? 'active' : '' }}">Katalog Sapi</a>
-        <a href="{{ route('pesanan.index') }}" class="{{ request()->routeIs('pesanan.*') ? 'active' : '' }}">Registrasi & Booking</a>
+        <a href="{{ route('sapi.index') }}" class="{{ request()->routeIs('sapi.*') ? 'active' : '' }}">Katalog
+            Sapi</a>
+        <a href="{{ route('pesanan.index') }}" class="{{ request()->routeIs('pesanan.*') ? 'active' : '' }}">Registrasi &
+            Booking</a>
         <a href="#">Transaksi</a>
         <a href="#">Laporan</a>
     </div>
@@ -20,7 +22,7 @@
             <div class="user-profile" onclick="toggleLogout()">
                 👤
             </div>
-            
+
             <div class="dropdown-logout" id="logoutMenu">
                 <form action="/logout" method="POST" onsubmit="return confirm('Yakin ingin keluar dari sistem?')">
                     @csrf

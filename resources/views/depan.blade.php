@@ -1,14 +1,6 @@
 @extends('layout.app')
 @section('title', 'Dashboard')
-@section('content')
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Istana Qurban</title>
-
+@section('css')
     <style>
         :root {
             --primary: #1e4d2b;
@@ -18,16 +10,16 @@
             --white: #ffffff;
             --text: #2d3436;
             --muted: #7f8c8d;
-            --shadow: 0 12px 25px rgba(0,0,0,0.05);
+            --shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
         }
 
         h1 {
             margin-bottom: 15px;
             font-size: 28px;
-            font-weight: 800;    
-            color: #ffffff;      
+            font-weight: 800;
+            color: #ffffff;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
@@ -89,9 +81,17 @@
             width: 100%;
         }
 
-        .stat-card.available::before { background: #2ecc71; }
-        .stat-card.booked::before { background: #f1c40f; }
-        .stat-card.sold::before { background: #e74c3c; }
+        .stat-card.available::before {
+            background: #2ecc71;
+        }
+
+        .stat-card.booked::before {
+            background: #f1c40f;
+        }
+
+        .stat-card.sold::before {
+            background: #e74c3c;
+        }
 
         .stat-label {
             font-size: 0.82rem;
@@ -107,9 +107,17 @@
             margin: 12px 0 8px;
         }
 
-        .available .stat-value { color: #27ae60; }
-        .booked .stat-value { color: #f39c12; }
-        .sold .stat-value { color: #c0392b; }
+        .available .stat-value {
+            color: #27ae60;
+        }
+
+        .booked .stat-value {
+            color: #f39c12;
+        }
+
+        .sold .stat-value {
+            color: #c0392b;
+        }
 
         .stat-total {
             font-size: 0.85rem;
@@ -140,7 +148,7 @@
         .menu-card:hover {
             transform: translateY(-5px);
             border-color: #dcefe4;
-            box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
         }
 
         .icon-box {
@@ -167,6 +175,7 @@
 
         /* Responsive */
         @media (max-width: 700px) {
+
             .stats-container,
             .menu-grid {
                 grid-template-columns: 1fr;
@@ -177,9 +186,8 @@
             }
         }
     </style>
-</head>
-<body>
-
+@endsection
+@section('content')
     <div class="wrapper">
         <header>
             <h1>Istana Qurban</h1>
@@ -223,13 +231,13 @@
                 </div>
             </a>
 
-        <div class="menu-card" onclick="window.location.href='{{ route('pesanan.index') }}'">
-            <div class="icon-box">📝</div>
-            <div class="menu-text">
-                 <h3>Registrasi & Booking</h3>
-                 <p>Pencatatan data pemesanan sapi</p>
-             </div>
-        </div>
+            <a href="{{ route('pesanan.index') }}" class="menu-card">
+                <div class="icon-box">📝</div>
+                <div class="menu-text">
+                    <h3>Registrasi & Booking</h3>
+                    <p>Pencatatan data pemesanan sapi</p>
+                </div>
+            </a>
 
             <div class="menu-card">
                 <div class="icon-box">💰</div>
@@ -249,6 +257,4 @@
         </div>
     </div>
 
-</body>
-</html>
 @endsection

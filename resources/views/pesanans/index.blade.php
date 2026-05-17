@@ -1,18 +1,10 @@
 @extends('layout.app')
-@section('title', 'Katalog Sapi - Istana Qurban')
-@section('content')
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Pesanan - Istana Qurban</title>
-
+@section('title', 'Daftar Pesanan - Istana Qurban')
+@section('css')
     <style>
-
         .container {
             width: 95%;
-            margin:  20px auto;
+            margin: 20px auto;
         }
 
         h1 {
@@ -40,7 +32,7 @@
             background: #fff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #ddd;
         }
 
@@ -52,7 +44,7 @@
         }
 
         thead {
-            background-color: #4c9b77; 
+            background-color: #4c9b77;
             color: white;
         }
 
@@ -68,7 +60,7 @@
             padding: 15px;
             border-bottom: 1px solid #eee;
             color: #444;
-            opacity: 1 !important; 
+            opacity: 1 !important;
         }
 
         tr:hover td {
@@ -85,9 +77,20 @@
             display: inline-block;
         }
 
-        .status-booking { background: #f6ad55; color: white; }
-        .status-lunas { background: #38b2ac; color: white; }
-        .status-batal { background: #e53e3e; color: white; }
+        .status-booking {
+            background: #f6ad55;
+            color: white;
+        }
+
+        .status-lunas {
+            background: #38b2ac;
+            color: white;
+        }
+
+        .status-batal {
+            background: #e53e3e;
+            color: white;
+        }
 
         /* --- BUTTONS --- */
         .btn-detail {
@@ -121,63 +124,65 @@
             color: #1e4d2b;
         }
     </style>
-</head>
-<body>
+@endsection
 
-<div class="container">
-    <h1>Daftar Pesanan</h1>
+@section('content')
+    <div class="container">
+        <h1>Daftar Pesanan</h1>
 
-    @if(session()->has('success'))
-        <div class="alert-success">
-            ✅ {{ session('success') }}
-        </div>
-    @endif
+        @if (session()->has('success'))
+            <div class="alert-success">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nama Pembeli</th>
-                    <th>No HP</th>
-                    <th>Kode Sapi</th>
-                    <th>Harga Jual</th>
-                    <th>Status Pesanan</th>
-                    <th style="text-align: center;">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($pesanans as $pesanan)
-                <tr>
-                    <td style="font-weight: bold;">{{ $pesanan->pembeli->nama }}</td>
-                    <td>{{ $pesanan->pembeli->no_hp }}</td>
-                    <td><code style="background: #eee; padding: 2px 5px; border-radius: 3px;">#{{ $pesanan->sapi->kode_sapi }}</code></td>
-                    <td style="font-weight: bold;">Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}</td>
-                    <td>
-                        <span class="badge 
-                            @if($pesanan->status == 'Booking') status-booking 
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Pembeli</th>
+                        <th>No HP</th>
+                        <th>Kode Sapi</th>
+                        <th>Harga Jual</th>
+                        <th>Status Pesanan</th>
+                        <th style="text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pesanans as $pesanan)
+                        <tr>
+                            <td style="font-weight: bold;">{{ $pesanan->pembeli->nama }}</td>
+                            <td>{{ $pesanan->pembeli->no_hp }}</td>
+                            <td><code
+                                    style="background: #eee; padding: 2px 5px; border-radius: 3px;">#{{ $pesanan->sapi->kode_sapi }}</code>
+                            </td>
+                            <td style="font-weight: bold;">
+                                Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}</td>
+                            <td>
+                                <span
+                                    class="badge 
+                            @if ($pesanan->status == 'Booking') status-booking 
                             @elseif($pesanan->status == 'Lunas') status-lunas 
-                            @else status-batal 
-                            @endif">
-                            {{ $pesanan->status }}
-                        </span>
-                    </td>
-                    <td style="text-align: center;">
-                        <a href="{{ route('pesanan.show', $pesanan->id) }}" class="btn-detail">LIHAT DETAIL</a>
-                    </td>
-                </tr>
-                @endforeach
+                            @else status-batal @endif">
+                                    {{ $pesanan->status }}
+                                </span>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="{{ route('pesanan.show', $pesanan->id) }}" class="btn-detail">LIHAT DETAIL</a>
+                            </td>
+                        </tr>
+                    @endforeach
 
-                @if($pesanans->isEmpty())
-                <tr>
-                    <td colspan="6" style="text-align: center; padding: 40px; color: #999;">Belum ada pesanan masuk.</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
+                    @if ($pesanans->isEmpty())
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 40px; color: #999;">Belum ada pesanan
+                                masuk.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-</div>
-
-</body>
-</html>
 @endsection
