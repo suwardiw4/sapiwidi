@@ -1,39 +1,60 @@
-<nav class="navbar">
-    <div class="navbar-brand">
-        <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban">
-        <span>Istana Qurban</span>
-    </div>
+<div class="custom-navbar">
+    <div class="nav-container">
+        <a href="{{ url('/') }}" class="nav-brand">
+            <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban" class="brand-logo">
+            <span>Istana Qurban</span>
+        </a>
 
-    <div class="nav-links">
-        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ route('sapi.index') }}" class="{{ request()->routeIs('sapi.*') ? 'active' : '' }}">Katalog
-            Sapi</a>
-        <a href="{{ route('pesanan.index') }}" class="{{ request()->routeIs('pesanan.*') ? 'active' : '' }}">Registrasi &
-            Booking</a>
-        <a href="#">Transaksi</a>
-        <a href="#">Laporan</a>
-    </div>
+        <!-- Tombol Hamburger (Hanya muncul di Mobile) -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
 
-    <div class="user-section">
-        <div class="user-name">
-            {{ Auth::user()->name }} </div>
+        <div class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a href="{{ route('dashboard') }}"
+                    class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('sapi.index') }}"
+                    class="nav-link {{ request()->routeIs('sapi.*') ? 'active' : '' }}">Katalog Sapi</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('pesanan.index') }}"
+                    class="nav-link {{ request()->routeIs('pesanan.*') ? 'active' : '' }}">Registrasi & Booking</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Transaksi</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Laporan</a>
+            </li>
+        </div>
 
-        <div class="user-profile-container">
-            <div class="user-profile" onclick="toggleLogout()">
-                👤
-            </div>
+        <div class="user-section">
+            <div class="user-name">
+                {{ Auth::user()->name }} </div>
 
-            <div class="dropdown-logout" id="logoutMenu">
-                <form action="/logout" method="POST" onsubmit="return confirm('Yakin ingin keluar dari sistem?')">
-                    @csrf
-                    <button type="submit">
-                        🚪 Logout
-                    </button>
-                </form>
+            <div class="user-profile-container">
+                <div class="user-profile" onclick="toggleLogout()">
+                    👤
+                </div>
+
+                <div class="dropdown-logout" id="logoutMenu">
+                    <form action="/logout" method="POST" onsubmit="return confirm('Yakin ingin keluar dari sistem?')">
+                        @csrf
+                        <button type="submit">
+                            🚪 Logout
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</nav>
+</div>
+
 
 <script>
     function toggleLogout() {
@@ -52,4 +73,17 @@
             }
         }
     }
+
+    // Memastikan halaman web sudah selesai dimuat sepenuhnya
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.getElementById("mobile-menu");
+        const navLinks = document.getElementById("nav-links");
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener("click", function() {
+                // Menambah / menghapus class 'active' setiap kali hamburger di-klik
+                navLinks.classList.toggle("active");
+            });
+        }
+    });
 </script>

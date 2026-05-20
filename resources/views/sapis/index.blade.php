@@ -3,7 +3,6 @@
 @section('css')
     <style>
         /* --- LAYOUT --- */
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -112,12 +111,27 @@
         form {
             display: inline;
         }
+
+        .catalog-header {
+            margin-bottom: 30px;
+        }
+
+        .catalog-header h2 {
+            color: #0b4228;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
     </style>
 @endsection
+
 @section('content')
     <div class="container">
 
-        <h1>Katalog Sapi</h1>
+        <div class="catalog-header">
+            <h2>Katalog Sapi Qurban</h2>
+            <p>Pilih dan pesan hewan qurban terbaik dengan kualitas terjamin.</p>
+        </div>
 
         <div class="top-bar">
             <a href="{{ route('sapi.create') }}" class="btn-add">+ TAMBAH SAPI</a>
@@ -175,8 +189,6 @@
                                     HAPUS
                                 </button>
                             </form>
-
-
                         </div>
                     </div>
                 </div>

@@ -29,8 +29,15 @@ Route::middleware('auth:SuperAdmin,Admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Proses Keluar Aplikasi
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // // Proses Keluar Aplikasi
+    // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // // 2. Rute Pendamping (Untuk menangkap jika ada yang iseng mengetik /logout di URL browser)
+    // Route::get('/logout', function () {
+    //     return redirect('/dashboard'); // atau redirect('/login') sesuai keinginan Anda
+    // });
+
+    // Mengizinkan rute /logout menerima request GET (dari URL) maupun POST (dari tombol form)
+    Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Manajemen Sapi
     Route::get('/sapi', [SapiController::class, 'index'])->name('sapi.index');

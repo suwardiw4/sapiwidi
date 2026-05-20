@@ -2,10 +2,10 @@
 @section('title', 'Daftar Pesanan - Istana Qurban')
 @section('css')
     <style>
-        .container {
-            width: 95%;
-            margin: 20px auto;
-        }
+        /* .container {
+                    width: 95%;
+                    margin: 2px auto;
+                } */
 
         h1 {
             color: #1e4d2b;
@@ -25,6 +25,25 @@
             margin-bottom: 20px;
             font-size: 14px;
             font-weight: bold;
+        }
+
+        .table-responsive-custom {
+            width: 100%;
+            overflow-x: auto;
+            /* Memunculkan scrollbar horizontal jika tabel kepanjangan */
+            -webkit-overflow-scrolling: touch;
+            /* Membuat scroll terasa mulus di iPhone/Android */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            /* Menjaga sudut melengkung tabel kamu tetap rapi */
+        }
+
+        /* Memastikan tabel mengambil lebar penuh dari pembungkusnya */
+        .table-responsive-custom table {
+            width: 100%;
+            min-width: 600px;
+            /* Memaksa kolom punya ruang minimal agar teks tidak numpuk ke bawah */
+            border-collapse: collapse;
         }
 
         /* --- TABLE STYLING --- */
@@ -136,7 +155,7 @@
             </div>
         @endif
 
-        <div class="table-container">
+        <div class="table-responsive-custom">
             <table>
                 <thead>
                     <tr>

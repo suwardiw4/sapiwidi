@@ -45,7 +45,7 @@ class AuthController extends Controller
         return view('pages.auth.login');
     }
 
-    public function logout(Request $request)
+        public function logout(Request $request)
     {
         if (!Auth::check()) {
             return redirect('/');

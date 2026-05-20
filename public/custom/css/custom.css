@@ -1,3 +1,13 @@
+/* RESET GLOBAL: Menghilangkan space bawaan browser */
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    overflow-x: hidden; /* Mencegah scrollbar horizontal yang tidak diinginkan */
+}
+
+/* Reset Dasar */
 * {
     margin: 0;
     padding: 0;
@@ -5,67 +15,163 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    background: #f5f6fa;
-    color: #222;
+
+/* Latar Belakang Hijau Sage Muda */
+.custom-navbar {
+    background-color: #d1e2d6; 
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-/* --- NAVBAR --- */
-.navbar {
-    background-color: #d1e7dd;
-    padding: 12px 4%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    position: relative;
-}
-
-/* .nav-container {
-    max-width: 1200px;
+.nav-container {
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Membagi rata kiri, tengah, kanan */
     align-items: center;
-    padding: 0 20px;
+    padding: 0 24px;
+}
+
+/* Gaya Bagian Kiri (Brand) */
+.nav-brand {
+    color: #0b4228; /* Hijau tua gelap */
+    font-size: 18px;
+    font-weight: 800; /* Super Bold */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Gaya Bagian Tengah (Menu Navigasi) */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+/* 
+.nav-link {
+    color: #2b3a32; 
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700; 
+    padding: 8px 0;
+    position: relative;
+    display: inline-block;
 } */
 
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 1000;
-    color: #1e4d2b;
-    text-transform: uppercase;
-    font-size: 18px;
-    z-index: 1001;
-    /* Supaya tetap di atas saat menu mobile buka */
+.nav-link {
+    color: #2b3a32; /* Warna teks gelap abu-hijau saat tidak aktif */
+    text-decoration: none; /* MENGHILANGKAN GARIS BAWAH BAWAAN BROWSER */
+    font-size: 14px;
+    font-weight: 700; 
+    padding: 8px 0;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease;
 }
 
-.navbar-brand img {
-    height: 45px;
-    width: auto;
-}
-
-/* --- NAV LINKS (DESKTOP) --- */
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
+.nav-link a {
     text-decoration: none;
     color: #444;
     font-weight: 800;
     font-size: 14px;
-    transition: color 0.2s;
 }
 
-.nav-links a.active {
+.nav-link a.active {
     color: #1e4d2b;
     border-bottom: 2px solid #1e4d2b;
     padding-bottom: 5px;
+}
+
+/* Efek Garis Bawah Aktif & Hover */
+.nav-link:hover {
+    color: #0b4228;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0b4228; /* Warna garis bawah */
+    transition: width 0.2s ease;
+}
+
+.nav-link.active::after, .nav-link:hover::after {
+    width: 100%; /* Garis penuh saat aktif atau di-hover */
+}
+
+/* Gaya Bagian Kanan (Profil) */
+.profile-icon {
+    width: 22px;
+    height: 22px;
+    color: #2a1b4e; /* Ungu gelap sesuai gambar */
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Tombol Hamburger Mobile */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger-bar {
+    height: 3px;
+    width: 100%;
+    background-color: #0b4228;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column; /* Menyusun konten dari atas ke bawah */
+    min-height: 100vh; /* Memaksa tinggi minimal pembungkus setinggi layar HP/Monitor */
+}
+
+.main-content {
+    flex: 1; /* Otomatis melebar dan mendorong footer ke paling bawah jika konten sedikit */
+    padding: 20px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Gaya Footer Kamu */
+.custom-footer {
+    background-color: #f8f9fa; /* Sesuaikan warna latar belakang footer */
+    color: #555555;
+    padding: 15px 24px;
+    text-align: left; /* Atur ke 'center' jika ingin teks di tengah */
+    width: 100%;
+    border-top: 1px solid #e9ecef;
+
+    /* Tambahkan dua baris ini untuk menggeser konten ke kanan */
+    display: flex;
+    justify-content: flex-end;
 }
 
 /* --- USER SECTION --- */
@@ -138,116 +244,10 @@ body {
     display: block;
 }
 
-/* Hamburger Menu Icon (Hidden on Desktop) */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: #1e4d2b;
-    border-radius: 2px;
-}
-
-/* Sembunyikan tombol hamburger di layar laptop/desktop */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.nav-toggle .bar {
-    height: 3px;
-    width: 100%;
-    background-color: var(--primary);
-    border-radius: 10px;
-    transition: 0.3s ease;
-}
-/* --- RESPONSIVE MODE (MOBILE) --- */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-        /* Munculkan hamburger di HP */
-        order: 1;
-    }
-
-    .nav-toggle {
-        display: flex; /* Memunculkan tombol hamburger di HP */
-    }
-
-
-    .navbar-brand {
-        order: 2;
-        font-size: 14px;
-        /* Kecilin dikit tulisan brand di HP */
-    }
-
-    .navbar-brand img {
-        height: 35px;
-    }
-
-    .user-section {
-        order: 3;
-    }
-
-    .user-name {
-        display: none;
-        /* Sembunyikan nama di HP biar gak sempit, cukup ikon */
-    }
-
-    .nav-links {
-        display: none;
-        /* Sembunyikan menu asli */
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #d1e7dd;
-        flex-direction: column;
-        padding: 20px;
-        gap: 15px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-      .nav-links {
-        display: flex; /* Mengubah susunan menjadi flexbox */
-        flex-direction: column; /* Menyusun menu ke bawah (vertikal) */
-        position: absolute;
-        top: 60px; /* Sesuaikan dengan tinggi navbar Anda */
-        left: -100%; /* Melempar menu ke luar layar kiri agar tidak terlihat */
-        width: 100%;
-        background-color: var(--white);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-        transition: 0.3s ease;
-        z-index: 999;
-    }
-
-    .nav-links.active {
-        display: flex;
-        /* Munculkan saat hamburger di-klik */
-    }
-
-    .nav-links a {
-        font-size: 16px;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-}
 
 .container {
     width: 95%;
-    margin: 20px auto;
+    margin: -10px auto;
 }
 
 h1 {
@@ -278,4 +278,132 @@ body {
     background: linear-gradient(to bottom, #eef4f1, #f7faf9);
     color: var(--text);
     padding: 0px 0px;
+}
+
+
+/* =======================================================
+   RESPONSIVE STYLE (Untuk Layar HP & Tablet)
+   ======================================================= */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Menu ditarik ke dalam overlay dropdown mobile */
+    .nav-menu {
+        position: absolute;
+        top: 56px;
+        left: -100%;
+        flex-direction: column;
+        background-color: #d1e2d6;
+        width: 100%;
+        text-align: left;
+        transition: 0.3s ease;
+        padding: 20px 24px;
+        gap: 20px;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    }
+
+    .nav-menu.show-menu {
+        left: 0;
+    }
+
+    .nav-link::after {
+        display: none; /* Hilangkan garis bawah di mobile, ganti dengan penanda kiri */
+    }
+    
+    .nav-link.active {
+        border-left: 4px solid #0b4228;
+        padding-left: 8px;
+    }
+
+    /* Menyembunyikan atau merapikan ikon profil di mobile */
+    .nav-profile {
+        margin-right: 15px;
+    }
+    
+    /* Atur ulang urutan flexbox di mobile agar tombol burger di paling kanan */
+    .nav-container {
+        justify-content: space-between;
+    }
+    
+    .nav-toggle {
+        order: 3;
+    }
+    /* .nav-profile {
+        order: 2;
+        margin-left: auto;
+        margin-right: 20px;
+    } */
+
+    /* --- USER SECTION --- */
+    .user-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 1001;
+    }
+
+    .user-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e4d2b;
+    }
+
+    .user-profile-container {
+        position: relative;
+    }
+
+    .user-profile {
+        cursor: pointer;
+        font-size: 14px;
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1.5px solid #1e4d2b;
+    }
+
+    .dropdown-logout {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 130%;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 8px;
+        min-width: 140px;
+        z-index: 1000;
+        border: 1px solid #ddd;
+    }
+
+    .dropdown-logout button {
+
+        width: 100%;
+        background: transparent;
+        color: #c53030;
+        border: none;
+        padding: 8px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-align: left;
+    }
+
+    .dropdown-logout button:hover {
+        background: #fff5f5;
+    }
+
+    .dropdown-logout.show {
+        display: block;
+    }
+
 }

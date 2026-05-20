@@ -11,20 +11,22 @@
     @stack('styles')
 </head>
 
-@include('layout.navbar')
-
 <body>
-    {{-- <header>
-        <h1>Header Website</h1>
-    </header> --}}
+    <!-- Gunakan pembungkus utama halaman -->
+    <div class="page-wrapper">
+        @include('layout.navbar')
 
-    <div class="container">
-        @yield('content')
-    </div>
+        <!-- BAGIAN KONTEN (Isi halaman akan muncul di sini) -->
+        <main class="main-content">
+            @yield('content')
+        </main>
 
-    <footer>
-        <p>&nbsp; </p>
-    </footer>
+        <footer class="custom-footer">
+            <p>&copy; 2026 Project Saya</p>
+        </footer>
 </body>
+
+<!-- Link ke Custom JS -->
+<script src="{{ asset('custom/js/navbar.js') }}"></script>
 
 </html>
