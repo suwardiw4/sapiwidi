@@ -24,9 +24,12 @@
         <footer class="custom-footer">
             <p>&copy; 2026 Project Saya</p>
         </footer>
+
+        <!-- Link ke Custom JS -->
+        <script src="{{ asset('custom/js/navbar.js') }}"></script>
+        @stack('scriptlink')
+        @yield('script')
 </body>
 
-<!-- Link ke Custom JS -->
-<script src="{{ asset('custom/js/navbar.js') }}"></script>
 
 </html>

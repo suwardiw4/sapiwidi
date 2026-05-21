@@ -1,9 +1,5 @@
 <div class="custom-navbar">
     <div class="nav-container">
-        <a href="{{ url('/') }}" class="nav-brand">
-            <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban" class="brand-logo">
-            <span>Istana Qurban</span>
-        </a>
 
         <!-- Tombol Hamburger (Hanya muncul di Mobile) -->
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -11,6 +7,11 @@
             <span class="hamburger-bar"></span>
             <span class="hamburger-bar"></span>
         </button>
+
+        <a href="{{ url('/') }}" class="nav-brand">
+            <img src="{{ asset('img/logo-istana-qurban.png') }}" alt="Logo Istana Qurban" class="brand-logo">
+            <span>Istana Qurban</span>
+        </a>
 
         <div class="nav-menu" id="navMenu">
             <li class="nav-item">
@@ -25,12 +26,17 @@
                 <a href="{{ route('pesanan.index') }}"
                     class="nav-link {{ request()->routeIs('pesanan.*') ? 'active' : '' }}">Registrasi & Booking</a>
             </li>
+
             <li class="nav-item">
-                <a href="#" class="nav-link">Transaksi</a>
+                <a href="{{ route('pembayaran.index') }}"
+                    class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active' : '' }}">Transaksi</a>
             </li>
+
             <li class="nav-item">
-                <a href="#" class="nav-link">Laporan</a>
+                <a href="{{ route('laporan.index') }}"
+                    class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}">Laporan</a>
             </li>
+
         </div>
 
         <div class="user-section">

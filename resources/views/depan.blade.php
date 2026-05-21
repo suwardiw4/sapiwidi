@@ -31,7 +31,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
@@ -54,7 +53,6 @@
             opacity: 0.92;
         }
 
-        /* Statistik */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -124,7 +122,6 @@
             color: var(--muted);
         }
 
-        /* Menu */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -143,6 +140,7 @@
             align-items: center;
             gap: 18px;
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .menu-card:hover {
@@ -173,7 +171,6 @@
             color: var(--muted);
         }
 
-        /* Responsive */
         @media (max-width: 700px) {
 
             .stats-container,
@@ -194,7 +191,6 @@
             <p class="subtitle">Sistem Pencatatan & Manajemen Penjualan Sapi</p>
         </header>
 
-        <!-- Statistik -->
         <div class="stats-container">
             <div class="stat-card available">
                 <div class="stat-label">Tersedia</div>
@@ -221,7 +217,6 @@
             </div>
         </div>
 
-        <!-- Menu -->
         <div class="menu-grid">
             <a href="{{ route('sapi.index') }}" class="menu-card">
                 <div class="icon-box">🐄</div>
@@ -231,15 +226,15 @@
                 </div>
             </a>
 
-            <a href="{{ route('pesanan.index') }}" class="menu-card">
+            <div class="menu-card" onclick="window.location.href='{{ route('pesanan.index') }}'">
                 <div class="icon-box">📝</div>
                 <div class="menu-text">
                     <h3>Registrasi & Booking</h3>
                     <p>Pencatatan data pemesanan sapi</p>
                 </div>
-            </a>
+            </div>
 
-            <div class="menu-card">
+            <div class="menu-card" onclick="window.location.href='{{ route('pembayaran.index') }}'">
                 <div class="icon-box">💰</div>
                 <div class="menu-text">
                     <h3>Pembayaran & Keuangan</h3>
@@ -247,7 +242,7 @@
                 </div>
             </div>
 
-            <div class="menu-card">
+            <div class="menu-card" onclick="window.location.href='{{ route('laporan.index') }}'">
                 <div class="icon-box">📊</div>
                 <div class="menu-text">
                     <h3>Rekap Penjualan</h3>

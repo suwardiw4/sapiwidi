@@ -2,10 +2,10 @@
 @section('title', 'Daftar Pesanan - Istana Qurban')
 @section('css')
     <style>
-        /* .container {
-                    width: 95%;
-                    margin: 2px auto;
-                } */
+        .container {
+            width: 95%;
+            margin: 20px auto;
+        }
 
         h1 {
             color: #1e4d2b;
@@ -62,6 +62,7 @@
             background-color: #fff;
         }
 
+
         thead {
             background-color: #4c9b77;
             color: white;
@@ -97,12 +98,12 @@
         }
 
         .status-booking {
-            background: #f6ad55;
+            background: #e53e3e;
             color: white;
         }
 
         .status-lunas {
-            background: #38b2ac;
+            background: #4bd18e;
             color: white;
         }
 
@@ -163,7 +164,7 @@
                         <th>No HP</th>
                         <th>Kode Sapi</th>
                         <th>Harga Jual</th>
-                        <th>Status Pesanan</th>
+                        <th>Status Pembayaran</th>
                         <th style="text-align: center;">Aksi</th>
                     </tr>
                 </thead>
@@ -175,15 +176,18 @@
                             <td><code
                                     style="background: #eee; padding: 2px 5px; border-radius: 3px;">#{{ $pesanan->sapi->kode_sapi }}</code>
                             </td>
-                            <td style="font-weight: bold;">
-                                Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}</td>
+                            <td style="font-weight: bold;">Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}
+                            </td>
                             <td>
                                 <span
                                     class="badge 
-                            @if ($pesanan->status == 'Booking') status-booking 
-                            @elseif($pesanan->status == 'Lunas') status-lunas 
-                            @else status-batal @endif">
-                                    {{ $pesanan->status }}
+                            @if ($pesanan->status_pembayaran == 'Lunas') status-lunas 
+                            @else status-booking @endif">
+                                    @if ($pesanan->status_pembayaran == 'Lunas')
+                                        LUNAS
+                                    @else
+                                        BELUM LUNAS
+                                    @endif
                                 </span>
                             </td>
                             <td style="text-align: center;">

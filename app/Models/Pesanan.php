@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Pembeli;
+use App\Models\Sapi;
+use App\Models\Pembayaran;
 class Pesanan extends Model
 {
     use HasFactory;
@@ -13,6 +16,7 @@ class Pesanan extends Model
         'pembeli_id',
         'sapi_id',
         'status',
+        'status_pembayaran'
     ];
 
     public function pembeli()
@@ -23,5 +27,10 @@ class Pesanan extends Model
     public function sapi()
     {
         return $this->belongsTo(Sapi::class); //PESANAN INI milik/merujuk ke satu SAPI
+    }
+
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class);
     }
 }

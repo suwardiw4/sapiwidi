@@ -1,28 +1,12 @@
-@extends('layout.app2')
+@extends('layout.app')
 @section('title', 'Detail Pesanan - Istana Qurban')
-@section('content')
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+@section('css')
     <style>
-
-        body {
-            background: #f5f6fa;
-            color: #222;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #ddd;
+        /* --- GRID LAYOUT --- */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
         .header-section {
@@ -30,71 +14,109 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #4c9b77;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            padding-bottom: 18px;
+            margin-bottom: 30px;
         }
 
         h1 {
             color: #1e4d2b;
-            font-size: 22px;
+            font-size: 24px;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
         }
 
+        .header-status-block {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* --- BADGES --- */
         .status-badge {
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+            padding: 5px 14px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
             background: #f6ad55;
             color: white;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
         }
 
-        /* --- GRID LAYOUT --- */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .pay-status {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 14px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .pay-lunas {
+            background: #4bd18e;
+            color: white;
+        }
+
+        .pay-belum {
+            background: #e53e3e;
+            color: white;
         }
 
         h3 {
-            font-size: 14px;
-            color: #4c9b77;
+            font-size: 13px;
+            font-weight: 800;
+            color: #1e4d2b;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-left: 4px solid #4c9b77;
             padding-left: 10px;
+            letter-spacing: 0.5px;
         }
 
+        /* --- INFO ROW LAYOUT --- */
         .info-group {
-            margin-bottom: 10px;
-            font-size: 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
             display: flex;
+            line-height: 1.5;
         }
 
         .info-label {
-            width: 100px;
+            width: 90px;
             font-weight: bold;
             color: #666;
         }
 
-        .info-value {
-            flex: 1;
-            color: #333;
+        .info-separator {
+            width: 15px;
+            color: #666;
+            font-weight: bold;
         }
 
-        /* --- FOTO SAPI --- */
+        .info-value {
+            flex: 1;
+            color: #222;
+            font-weight: 600;
+        }
+
+        /* --- PHOTO SAPI --- */
         .photo-box {
             width: 100%;
-            height: 200px;
+            height: 220px;
             border-radius: 6px;
             overflow: hidden;
-            border: 1px solid #ddd;
-            background: #efefef;
+            border: 1px solid #ccc;
+            background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         .photo-box img {
@@ -103,26 +125,77 @@
             object-fit: cover;
         }
 
-        /* --- ACTIONS --- */
+        /* --- ACTION SECTION & BUTTONS --- */
         .action-section {
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 40px;
+            padding-top: 25px;
             border-top: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-group-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Base Button Style */
+        .btn {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            text-align: center;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn-back {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #ccc;
+        }
+
+        .btn-back:hover {
+            color: #1e4d2b;
+            border-color: #1e4d2b;
+        }
+
+        .btn-pay {
+            background: #d1e7dd;
+            color: #1e4d2b;
+            border: 1px solid #4c9b77;
+        }
+
+        .btn-pay:hover {
+            background: #4c9b77;
+            color: white;
+        }
+
+        .btn-invoice {
+            background: #fff;
+            color: #1e4d2b;
+            border: 1px solid #ccc;
+        }
+
+        .btn-invoice:hover {
+            background: #f2f2f2;
+            border-color: #1e4d2b;
         }
 
         .btn-cancel {
             background: #fff;
             color: #e53e3e;
             border: 1px solid #e53e3e;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
         }
 
         .btn-cancel:hover {
@@ -130,90 +203,125 @@
             color: white;
         }
 
-        .btn-back {
-            text-decoration: none;
-            color: #666;
-            font-size: 13px;
-            font-weight: bold;
-        }
+        @media (max-width: 650px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
 
-        .btn-back:hover {
-            color: #4c9b77;
-        }
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
 
-        @media (max-width: 600px) {
-            .detail-grid { grid-template-columns: 1fr; }
+            .header-status-block {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .action-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-group-right {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
-</head>
-<body>
+@endsection
 
-<div class="container">
-    <div class="header-section">
-        <h1>Detail Pesanan</h1>
-        <span class="status-badge">{{ $pesanan->status }}</span>
-    </div>
+@section('content')
+    <div class="container"
+        style="max-width: 850px; margin: 0 auto; background: #fff; padding: 35px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ddd;">
 
-    <div class="detail-grid">
-        <!-- Kolom Pembeli -->
-        <div>
-            <h3>Informasi Pembeli</h3>
-            <div class="info-group">
-                <div class="info-label">Nama</div>
-                <div class="info-value">: {{ $pesanan->pembeli->nama }}</div>
-            </div>
-            <div class="info-group">
-                <div class="info-label">No HP</div>
-                <div class="info-value">: {{ $pesanan->pembeli->no_hp }}</div>
-            </div>
-            <div class="info-group" style="flex-direction: column;">
-                <div class="info-label">Alamat :</div>
-                <div class="info-value" style="margin-top: 5px; line-height: 1.5;">{{ $pesanan->pembeli->alamat }}</div>
+        <div class="header-section">
+            <h1>Detail Pesanan</h1>
+            <div class="header-status-block">
+                <span class="status-badge">{{ $pesanan->status }}</span>
+                <span class="pay-status {{ $pesanan->status_pembayaran == 'Lunas' ? 'pay-lunas' : 'pay-belum' }}">
+                    {{ $pesanan->status_pembayaran == 'Lunas' ? 'LUNAS' : 'BELUM LUNAS' }}
+                </span>
             </div>
         </div>
 
-        <!-- Kolom Sapi -->
-        <div>
-            <h3>Informasi Sapi</h3>
-            <div class="photo-box">
-                @if($pesanan->sapi->foto_path)
-                    <img src="{{ asset('storage/' . $pesanan->sapi->foto_path) }}" alt="Foto Sapi">
-                @else
-                    <span style="color: #999; font-size: 12px;">Tidak ada foto</span>
-                @endif
+        <div class="detail-grid">
+            <div>
+                <h3>Informasi Pembeli</h3>
+                <div class="info-group">
+                    <span class="info-label">Nama</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value">{{ $pesanan->pembeli->nama }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">No HP</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value">{{ $pesanan->pembeli->no_hp }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Alamat</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value" style="font-weight: 500; color: #444;">{{ $pesanan->pembeli->alamat }}</span>
+                </div>
             </div>
-            <div class="info-group">
-                <div class="info-label">Kode</div>
-                <div class="info-value">: <strong>{{ $pesanan->sapi->kode_sapi }}</strong></div>
-            </div>
-            <div class="info-group">
-                <div class="info-label">Jenis</div>
-                <div class="info-value">: {{ $pesanan->sapi->jenis_sapi }}</div>
-            </div>
-            <div class="info-group">
-                <div class="info-label">Bobot</div>
-                <div class="info-value">: {{ $pesanan->sapi->bobot }} kg</div>
-            </div>
-            <div class="info-group">
-                <div class="info-label">Harga</div>
-                <div class="info-value" style="color: #4c9b77; font-weight: bold;">
-                    : Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}
+
+            <div>
+                <h3>Informasi Sapi</h3>
+                <div class="photo-box">
+                    @if ($pesanan->sapi->foto_path)
+                        <img src="{{ asset('storage/' . $pesanan->sapi->foto_path) }}" alt="Foto Sapi">
+                    @else
+                        <span style="color: #bbb; font-size: 12px; font-weight: bold; text-transform: uppercase;">Belum Ada
+                            Foto</span>
+                    @endif
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Kode Sapi</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value"
+                        style="color: #1e4d2b; font-weight: 800;">#{{ $pesanan->sapi->kode_sapi }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Jenis</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value">{{ $pesanan->sapi->jenis_sapi }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Bobot</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value">{{ $pesanan->sapi->bobot }} kg</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Harga</span>
+                    <span class="info-separator">:</span>
+                    <span class="info-value" style="color: #4c9b77; font-weight: 800; font-size: 15px;">
+                        Rp{{ number_format($pesanan->sapi->harga_jual, 0, ',', '.') }}
+                    </span>
                 </div>
             </div>
         </div>
+
+        <div class="action-section">
+            <a href="{{ route('pesanan.index') }}" class="btn btn-back">← KEMBALI</a>
+
+            <div class="action-group-right">
+                <a href="{{ route('pembayaran.invoice', $pesanan->id) }}" class="btn btn-invoice">🖨️ CETAK INVOICE</a>
+
+                @if ($pesanan->status_pembayaran != 'Lunas')
+                    <a href="{{ route('pembayaran.create', $pesanan->id) }}" class="btn btn-pay">INPUT PEMBAYARAN</a>
+                @endif
+
+                <form action="{{ route('pesanan.destroy', $pesanan->id) }}" method="POST"
+                    onsubmit="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-cancel">BATALKAN PESANAN</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
-    <div class="action-section">
-        <a href="{{ route('pesanan.index') }}" class="btn-back">← KEMBALI KE DAFTAR</a>
-
-        <form action="{{ route('pesanan.destroy', $pesanan->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn-cancel">BATALKAN PESANAN</button>
-        </form>
-    </div>
-</div>
-
-</body>
-</html>
 @endsection
