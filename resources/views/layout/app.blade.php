@@ -21,6 +21,9 @@
             @yield('content')
         </main>
 
+
+        @stack('modals')
+
         <footer class="custom-footer">
             <p>&copy; 2026 Project Saya</p>
         </footer>

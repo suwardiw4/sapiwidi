@@ -203,7 +203,7 @@
             color: white;
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 768px) {
             .detail-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -232,10 +232,14 @@
         }
     </style>
 @endsection
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('custom/css/formmodal.css') }}">
+@endpush
+
 
 @section('content')
     <div class="container"
-        style="max-width: 850px; margin: 0 auto; background: #fff; padding: 35px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ddd;">
+        style="height: auto; min-height: unset; padding: 0;max-width: 850px; margin: 0 auto; background: #fff; padding: 35px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ddd;">
 
         <div class="header-section">
             <h1>Detail Pesanan</h1>
@@ -310,7 +314,13 @@
                 <a href="{{ route('pembayaran.invoice', $pesanan->id) }}" class="btn btn-invoice">🖨️ CETAK INVOICE</a>
 
                 @if ($pesanan->status_pembayaran != 'Lunas')
-                    <a href="{{ route('pembayaran.create', $pesanan->id) }}" class="btn btn-pay">INPUT PEMBAYARAN</a>
+                    {{-- <a href="{{ route('pembayaran.create', $pesanan->id) }}" class="btn btn-pay">INPUT PEMBAYARAN</a>
+                     --}}
+                    <button type="button" class="btn-input-pembayaran btn btn-pay"
+                        data-url="{{ route('pembayaran.create', $pesanan->id) }}" {{-- Sesuaikan rute Anda --}}
+                        id="btnBukaPembayaran">
+                        INPUT PEMBAYARAN
+                    </button>
                 @endif
 
                 <form action="{{ route('pesanan.destroy', $pesanan->id) }}" method="POST"
@@ -324,4 +334,32 @@
 
     </div>
 
+@endsection
+
+@push('modals')
+    <!-- Struktur Modal Kustom -->
+    <div id="pembayaranModalKustom" class="modal-overlay-kustom">
+        <div class="modal-box-kustom">
+
+            <!-- BAGIAN HEADER BARU -->
+            <div class="modal-header-kustom">
+                <h5 class="modal-title-kustom">Form Pembayaran</h5>
+                <span class="modal-close-kustom">&times;</span>
+            </div>
+
+            <!-- Wadah Konten Form Dinamis -->
+            <div id="modalBodyPembayaran">
+                <!-- Spinner Loading Awal -->
+                <div class="modal-loading-kustom">
+                    <div class="spinner-kustom"></div>
+                    <p>Memuat form pembayaran...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@endpush
+
+@section('script')
+    @include('pesanans.showscript')
 @endsection
