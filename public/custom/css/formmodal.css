@@ -1,0 +1,113 @@
+/* 1. Background Hitam Transparan di Belakang Modal */
+.modal-overlay-kustom {
+    display: none; /* Tersembunyi secara default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 99999;
+    
+    /* Perubahan Penting: Memastikan konten bisa di-scroll jika kepanjangan di HP */
+    overflow-y: auto; 
+    padding: 20px 10px; /* Jarak aman atas-bawah saat di-scroll di HP */
+    box-sizing: border-box;
+    
+    justify-content: center;
+    align-items: flex-start; /* Mengubah dari 'center' ke 'flex-start' agar bagian atas modal tidak terpotong di HP pendek */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Aktifkan kelas ini lewat JS untuk animasi muncul */
+.modal-overlay-kustom.aktif {
+    display: flex;
+    opacity: 1;
+}
+
+/* 1. Box Utama Modal (Dioptimalkan penuh untuk HP) */
+.modal-box-kustom {
+    background-color: #ffffff;
+    padding: 15px; 
+    border-radius: 12px;
+    width: 100%; /* Gunakan lebar penuh */
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    
+    /* Perubahan Penting: Mengatur margin atas otomatis agar tidak menempel ke frame browser HP */
+    margin: 40px auto; 
+    
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+
+      /* --- TAMBAHKAN 3 BARIS INI UNTUK MENGUNCI TINGGI --- */
+    max-height: 85vh; /* Membatasi tinggi modal maksimal 85% dari tinggi layar HP/Laptop */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay-kustom.aktif .modal-box-kustom {
+    transform: translateY(0);
+}
+
+/* 2. Header Modal (Dipastikan wajib terlihat paling atas) */
+.modal-header-kustom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* 3. Judul Form */
+.modal-title-kustom {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666666;
+    font-family: sans-serif;
+}
+
+/* 4. Tombol Silang */
+.modal-close-kustom {
+    font-size: 26px;
+    font-weight: bold;
+    color: #aaaaaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.modal-close-kustom:hover {
+    color: #333333;
+    transform: scale(1.1);
+}
+
+/* 4. Style Spinner Loading Kustom */
+.modal-loading-kustom {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+}
+
+.spinner-kustom {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #9bbfae;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    animation: putar-spinner 1s linear infinite;
+}
+
+@keyframes putar-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
