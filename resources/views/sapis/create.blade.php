@@ -1,14 +1,14 @@
-@extends('layout.app')
+@extends('layout.appmodal')
 @section('title', 'Tambah Sapi - Istana Qurban')
 @section('css')
     <style>
         .sapi-form-card {
-            background: #fff;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            /* Menarik tombol simpan dan teks kembali ke bagian bawah modal */
+            /* margin: 10px auto 0 auto; */
         }
 
         .modal-title {
@@ -62,18 +62,20 @@
             box-shadow: 0 0 0 3px rgba(76, 155, 119, 0.1);
         }
 
-        /* Box Preview */
         .current-photo-preview {
             width: 100%;
-            height: 180px;
-            background: #fafafa;
-            border: 2px dashed #ccc;
-            margin-bottom: 15px;
+            max-width: 280px;
+            /* Diperkecil dari 350px */
+            height: 130px;
+            /* Diperkecil dari 180px */
+            margin: 0 auto 15px auto;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
-            overflow: hidden;
+            background-color: #f9f9f9;
         }
 
         .current-photo-preview img {
@@ -91,7 +93,7 @@
             font-weight: 800;
             cursor: pointer;
             width: 100%;
-            margin-top: 15px;
+            margin-top: 10px;
             text-transform: uppercase;
             border-radius: 4px;
             letter-spacing: 0.5px;
@@ -185,22 +187,41 @@
         </form>
     </div>
 
+
 @endsection
 
-@section('script')
-    {{-- SCRIPT INSTANT PREVIEW --}}
+@push('script')
     <script>
-        const fotoInput = document.getElementById('foto_input');
-        const imagePreview = document.getElementById('image-preview');
-        const placeholder = document.getElementById('preview-placeholder');
+        // EVENT DELEGATION: Langsung tangkap event 'change'
+        document.addEventListener('change', function(event) {
 
-        fotoInput.onchange = evt => {
-            const [file] = fotoInput.files;
-            if (file) {
-                imagePreview.src = URL.createObjectURL(file);
-                imagePreview.style.display = 'block';
-                placeholder.style.display = 'none';
+            // Cek apakah elemen yang berubah adalah input foto milik Anda
+            if (event.target && event.target.id === 'foto_input') {
+                alert('xxx');
+                const input = event.target;
+                const imagePreview = document.getElementById('image-preview');
+                const previewPlaceholder = document.getElementById('preview-placeholder');
+
+                // Jika elemen preview ditemukan di dalam DOM modal
+                if (imagePreview && previewPlaceholder) {
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                            previewPlaceholder.style.display = 'none';
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // Reset jika batal pilih file
+                        imagePreview.src = "";
+                        imagePreview.style.display = 'none';
+                        previewPlaceholder.style.display = 'block';
+                    }
+                }
             }
-        }
+        });
     </script>
-@endsection
+@endpush

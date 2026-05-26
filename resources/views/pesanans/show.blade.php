@@ -236,7 +236,6 @@
     <link rel="stylesheet" href="{{ asset('custom/css/formmodal.css') }}">
 @endpush
 
-
 @section('content')
     <div class="container"
         style="height: auto; min-height: unset; padding: 0;max-width: 850px; margin: 0 auto; background: #fff; padding: 35px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ddd;">
@@ -361,5 +360,5 @@
 @endpush
 
 @section('script')
-    @include('pesanans.showscript')
+    @include('pesanans.showjs')
 @endsection

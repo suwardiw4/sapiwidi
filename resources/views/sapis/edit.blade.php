@@ -1,21 +1,32 @@
-@extends('layout.app')
+@extends('layout.appmodal')
 @section('title', 'Edit Data Sapi - Istana Qurban')
 @section('css')
     <style>
-        body {
-            background: #f5f6fa;
-            color: #222;
-            padding: 40px 20px;
-        }
+        /* body {
+                                                                                            background: #f5f6fa;
+                                                                                            color: #222;
+                                                                                            padding: 40px 20px;
+                                                                                        } */
 
-        .container {
-            background: #efefef;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
+        /*
+                                                                                        .container {
+                                                                                                background: #efefef;
+                                                                                                max-width: 500px;
+                                                                                                margin: 0 auto;
+                                                                                                padding: 30px;
+                                                                                                border-radius: 8px;
+                                                                                                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                                                                                                position: relative;
+                                                                                            }
+                                                                                                */
+
+        .sapi-form-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            /* Menarik tombol simpan dan teks kembali ke bagian bawah modal */
+            /* margin: 10px auto 0 auto; */
         }
 
         .modal-title {
@@ -64,23 +75,42 @@
             border-color: #4c9b77;
         }
 
+        /*
+                                                                    .current-photo-preview {
+                                                                            width: 100%;
+                                                                            height: 150px;
+                                                                            background: #fff;
+                                                                            border: 1px solid #ccc;
+                                                                            margin-bottom: 15px;
+                                                                            display: flex;
+                                                                            align-items: center;
+                                                                            justify-content: center;
+                                                                            overflow: hidden;
+                                                                            border-radius: 4px;
+                                                                        }
+                                                                            */
+
         .current-photo-preview {
             width: 100%;
-            height: 150px;
-            background: #fff;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
+            max-width: 280px;
+            /* Diperkecil dari 350px */
+            height: 130px;
+            /* Diperkecil dari 180px */
+            margin: 0 auto 15px auto;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            border-radius: 4px;
+            background-color: #f9f9f9;
         }
 
         .current-photo-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .btn-simpan {
@@ -119,7 +149,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="sapi-form-card">
         <h2 class="modal-title">Edit Data Sapi</h2>
 
         {{-- Alert Error --}}
@@ -137,20 +167,32 @@
             @csrf
             @method('PUT')
 
-            {{-- Preview Foto Saat Ini --}}
-            <label style="font-size:12px; font-weight:bold; display:block; margin-bottom:5px;">Foto Saat Ini :</label>
-            <div class="current-photo-preview">
-                @if ($sapi->foto_path)
-                    <img src="{{ asset('storage/' . $sapi->foto_path) }}" alt="foto sapi">
-                @else
-                    <span style="color: #999; font-size: 12px;">Tidak ada foto</span>
-                @endif
-            </div>
+            <!-- Bagian Kontainer Utama Form Foto -->
+            <div class="form-group-foto">
+                <label style="font-size:12px; font-weight:bold; display:block; margin-bottom:5px;">Foto Sapi :</label>
 
-            <label style="font-size:12px; font-weight:bold; display:block; margin-bottom:5px;">Upload Foto Baru
-                (Opsional) :</label>
-            <input type="file" name="foto_path" accept="image/*"
-                style="font-size:11px; margin-bottom:20px; width: 100%;">
+                <div class="photo-display-area"
+                    style="margin-bottom: 15px; display: flex; justify-content: center; align-items: center; width: 100%;">
+                    @if ($sapi->foto_path)
+                        <!-- TAMBAHKAN max-height dan object-fit DI SINI -->
+                        <img class="js-photo-target" src="{{ asset('storage/' . $sapi->foto_path) }}" alt="Foto Sapi"
+                            style="width: 100%; max-width: 280px; height: auto; max-height: 200px; object-fit: contain; display: block; border-radius: 4px; border: 1px solid #ddd;">
+                        <span class="js-no-photo-text" style="color: #999; font-size: 12px; display: none;">Tidak ada
+                            foto</span>
+                    @else
+                        <!-- LAKUKAN HAL YANG SAMA PADA TAG SCRIPT KOSONG -->
+                        <img class="js-photo-target" src="" alt="Foto Sapi"
+                            style="width: 100%; max-width: 280px; height: auto; max-height: 200px; object-fit: contain; display: none; border-radius: 4px; border: 1px solid #ddd;">
+                        <span class="js-no-photo-text"
+                            style="color: #999; font-size: 12px; display: block; text-align: center;">Tidak ada foto</span>
+                    @endif
+                </div>
+
+                <label style="font-size:12px; font-weight:bold; display:block; margin-bottom:5px;">Ganti Foto (Opsional)
+                    :</label>
+                <input type="file" name="foto_path" accept="image/*" id="foto_input_{{ $sapi->id }}"
+                    class="js-file-input" style="font-size:11px; margin-bottom:20px; width: 100%;">
+            </div>
 
             <div class="f-row">
                 <label>Kode :</label>
@@ -180,3 +222,42 @@
         </form>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        document.addEventListener('change', function(event) {
+            // Deteksi jika input file dengan class 'js-file-input' berubah
+            if (event.target && event.target.classList.contains('js-file-input')) {
+
+                const input = event.target;
+
+                // Cari kontainer pembungkus form foto terdekat
+                const container = input.closest('.form-group-foto');
+                const imageTarget = container.querySelector('.js-photo-target');
+                const noPhotoText = container.querySelector('.js-no-photo-text');
+
+                if (imageTarget) {
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            // Timpa src gambar lama dengan data gambar baru
+                            imageTarget.src = e.target.result;
+                            imageTarget.style.display = 'block'; // Pastikan gambar muncul
+
+                            if (noPhotoText) {
+                                noPhotoText.style.display =
+                                    'none'; // Sembunyikan teks "Tidak ada foto" jika sebelumnya kosong
+                            }
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // Jika user membatalkan pilihan file (kembali ke kondisi semula)
+                        // Opsi: Anda bisa mengosongkan gambar atau membiarkan gambar lama (disarankan membiarkan gambar lama jika ini mode edit)
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

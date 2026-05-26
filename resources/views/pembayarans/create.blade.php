@@ -4,11 +4,13 @@
     <style>
         .payment-card {
             background: #fff;
-            max-width: 500px;
+            /* max-width: 500px; */
             margin: 0 auto;
-            padding: 30px;
+            padding: 3px;
             border-radius: 8px;
             border: 1px solid #ddd;
+            width: 100%;
+            height: 100;
         }
 
         .modal-title {
@@ -101,8 +103,8 @@
 
         /* --- PHOTO PREVIEW BOX --- */
         .photo-placeholder {
-            width: 100%;
-            height: 180px;
+            width: auto;
+            height: 150px;
             background: #fafafa;
             border: 2px dashed #ccc;
             margin-bottom: 15px;
@@ -131,12 +133,12 @@
             background: #d1e7dd;
             border: 1px solid #4c9b77;
             color: #1e4d2b;
-            padding: 12px;
+            padding: 5px;
             font-size: 12px;
             font-weight: 800;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 5px;
             text-transform: uppercase;
             border-radius: 4px;
             letter-spacing: 0.5px;
@@ -151,7 +153,8 @@
         .btn-back {
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
             text-decoration: none;
             font-size: 12px;
             color: #666;

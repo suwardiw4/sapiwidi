@@ -124,6 +124,9 @@
         }
     </style>
 @endsection
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('custom/css/formmodal.css') }}">
+@endpush
 
 @section('content')
     <div class="container">
@@ -134,7 +137,9 @@
         </div>
 
         <div class="top-bar">
-            <a href="{{ route('sapi.create') }}" class="btn-add">+ TAMBAH SAPI</a>
+            <button type="button" class="btn-add" data-url="{{ route('sapi.create') }}" id="btnBukaFormSapi">
+                + TAMBAH SAPI
+            </button>
         </div>
 
         <div class="grid">
@@ -177,7 +182,8 @@
                         </div>
 
                         <div class="actions">
-                            <a href="{{ route('sapi.edit', $sapi->id) }}" class="btn-minimal">EDIT</a>
+                            <a data-url="{{ route('sapi.edit', $sapi->id) }}" class="btn-minimal btn-edit-sapi"
+                                id="btnBukaFormSapiEdit[]">EDIT</a>
 
                             @if ($sapi->status == 'Tersedia')
                                 <a href="{{ route('pesanan.create', $sapi->id) }}" class="btn-minimal">PESAN</a>
@@ -196,4 +202,32 @@
         </div>
     </div>
 
+@endsection
+
+@push('modals')
+    <!-- Struktur Modal Kustom -->
+    <div id="frmSapiModalKustom" class="modal-overlay-kustom">
+        <div class="modal-box-kustom">
+
+            <!-- BAGIAN HEADER BARU -->
+            <div class="modal-header-kustom">
+                <h5 id="titlemodal" class="modal-title-kustom">Form Tambah Data Sapi</h5>
+                <span class="modal-close-kustom">&times;</span>
+            </div>
+
+            <!-- Wadah Konten Form Dinamis -->
+            <div id="modalBody">
+                <!-- Spinner Loading Awal -->
+                <div class="modal-loading-kustom">
+                    <div class="spinner-kustom"></div>
+                    <p>Memuat form ...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@endpush
+
+@section('script')
+    @include('sapis.indexjs')
 @endsection
