@@ -22,13 +22,25 @@
             width: 100%;
             height: 160px;
             background: #eee;
+
         }
 
         .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            /* width: 100%;
+                                        height: 100%;
+                                        object-fit: cover; */
+            width: auto;
+            max-width: 280px;
+            height: 160px;
+            max-height: 200px;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-left: auto;
+            margin-right: auto;
         }
+
 
         .card-body {
             padding: 15px;
@@ -147,7 +159,7 @@
                 <div class="card">
                     <div class="card-image">
                         @if ($sapi->foto_path)
-                            <img src="{{ asset('storage/' . $sapi->foto_path) }}" alt="Foto Sapi">
+                            <img src="{{ asset('storage/' . $sapi->foto_path) }}" alt="Foto Sapi" style="">
                         @else
                             <div
                                 style="height:100%; display:flex; align-items:center; justify-content:center; color:#999; font-size: 12px;">
